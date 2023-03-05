@@ -18,8 +18,12 @@ services:
       MYSQL_NAME: 'db'
       MYSQL_USER: 'someuser'
       MYSQL_PASSWORD: 'toor'
+    ports:
+      - "8000:8000"
     depends_on:
       - db
+    volumes:
+      - ./api:/app
 
   rtmp:
     build: ./rtmp
@@ -29,7 +33,7 @@ services:
     container_name: rtmp-server
     depends_on:
       - api
-
+  
   # frontend:
   #   build: ./frontend
   #   command: npm start
