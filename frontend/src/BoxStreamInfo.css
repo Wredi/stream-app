@@ -1,0 +1,33 @@
+.stream-info{
+    width: 300px;
+    height: 300px;
+    background-color: #282828;
+
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 9fr 8fr 8fr;
+    gap: 10px;
+
+    flex-direction: column;
+    color: white;
+    padding: 20px;
+}
+
+.stream-info:hover{
+    transition: 0.5s;
+    filter: brightness(50%);
+    cursor: pointer;
+}
+
+.stream-info img{
+    width: 100%;
+    height: 100%;
+    background-color: #282828;
+    user-select: none;
+}
+
+.streamer-profile{
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+}
