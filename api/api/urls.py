@@ -19,4 +19,5 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('stream-auth/', include('stream_auth.urls')),
+    path('login/', include('login.urls')),
 ]
