@@ -1,59 +1,64 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_object_or_404, render
 from django.core.serializers import serialize
 from django.views.decorators.csrf import csrf_exempt
 import json
-
-from .models import User
-
-@csrf_exempt
-def getUserById(request, userId):
-    user = get_object_or_404(User, pk=userId)
-    data = serialize("json", user, fields=('username', 'password'))
-    return HttpResponse(data, content_type="application/json")
+from .models import CustomUser
+from django.contrib.auth import authenticate, login
+from django.contrib.auth import logout
 
 @csrf_exempt
-def addUser(request):
-    users = User.objects.all()
-    found= False
+def logout_view(request):
+    logout(request)
+    return HttpResponse(status=200)
 
-    body_unicode = request.body.decode('utf-8')
-    body = json.loads(body_unicode)
-    username = body["username"]
-    password = body["password"]
 
-    for user in users:
-        if user.get_username() == body["username"]:
-            found = True
-    if found == False:
-        newUser = User.objects.create(username = username, password = password)
-        newUser.save()
-        return HttpResponse(newUser)
+@csrf_exempt
+def lol_view(request):
+    print(request.user.username)
+    return HttpResponse(status=200)
+
+@csrf_exempt
+def login_view(request):
+    if request.method == 'POST':
+        print(request)
+        print(request.body)
+        data = json.loads(request.body)
+        username = data.get('username')
+        password = data.get('password')
+
+        if not username or not password:
+            return JsonResponse({'error': 'Both username and password are required.'}, status=400)
+
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+        else:
+            return JsonResponse({'error': 'Invalid credentials.'}, status=400)
+
+        return JsonResponse({'success': 'User logged successfully.'}, status=201)
     else:
-        return HttpResponse(0)
+        return JsonResponse({'error': 'Invalid request method.'}, status=405)
 
 @csrf_exempt
-def getAllUsers(request):
-    user = User.objects.all()
-    data = serialize("json", user, fields=('username', 'password'))
-    return  HttpResponse(data, content_type="application/json")            
+def register(request):
+    if request.method == 'POST':
+        print(request)
+        print(request.body)
+        data = json.loads(request.body)
+        username = data.get('username')
+        password = data.get('password')
 
-@csrf_exempt
-def getUserByNickname(request, username):
-    users = User.objects.all()
-    found = False
-    thisUser:User
+        if not username or not password:
+            return JsonResponse({'error': 'Both username and password are required.'}, status=400)
 
-    for user in users:
-        if username == user.get_username():
-            thisUser = user
-            found = True
-            break
-    
-    if found:
-        json_str = json.dumps({"username": thisUser.get_username(), "password": thisUser.get_password()})
-        return HttpResponse(json_str, content_type="application/json")
+        if CustomUser.objects.filter(username=username).exists():
+            return JsonResponse({'error': 'Username already taken.'}, status=400)
+
+        user = CustomUser.objects.create_user(username=username, password=password)
+        user.save()
+
+        return JsonResponse({'success': 'User created successfully.'}, status=201)
     else:
-        return HttpResponse(0)
-
+        return JsonResponse({'error': 'Invalid request method.'}, status=405)
