@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.utils import timezone
 
 class CustomUserManager(BaseUserManager):
     def create_user(self, username, password=None):
@@ -26,6 +27,7 @@ class CustomUserManager(BaseUserManager):
 
 class CustomUser(AbstractBaseUser):
     username = models.CharField(max_length=40, unique=True)
+    created_date = models.DateTimeField(default=timezone.now, blank=True)
 
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
@@ -46,3 +48,22 @@ class CustomUser(AbstractBaseUser):
     @property
     def is_staff(self):
         return self.is_admin
+
+class ChannelInfo(models.Model):
+    user = models.OneToOneField(
+        CustomUser,
+        on_delete=models.CASCADE,
+        primary_key=True,
+    )
+    channel_name = models.CharField(max_length=40)
+    profile_description = models.CharField(max_length=1024)
+
+class StreamInfo(models.Model):
+    user = models.OneToOneField(
+        CustomUser,
+        on_delete=models.CASCADE,
+        primary_key=True,
+    )
+    title = models.CharField(max_length=255)
+    activity_type = models.CharField(max_length=255)
+    stream_description = models.CharField(max_length=1024)
