@@ -1,13 +1,9 @@
-from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
-from django.shortcuts import get_object_or_404, render
-from django.core.serializers import serialize
+from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
 from .models import CustomUser, ChannelInfo, StreamInfo
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
-from django.utils import timezone
 
 @csrf_exempt
 def logout_view(request):
@@ -16,9 +12,16 @@ def logout_view(request):
 
 
 @csrf_exempt
-def lol_view(request):
-    print(request.user.username)
-    return HttpResponse(status=200)
+def curr_user_channel_data(request):
+    if not request.user.is_authenticated:
+        return JsonResponse({'error': 'User is not logged'}, status=401)
+
+    try:
+        channel_info = ChannelInfo.objects.get(user=request.user)
+    except ChannelInfo.DoesNotExist:
+        return JsonResponse({'error': 'Something wrong'}, status=502)
+
+    return JsonResponse(channel_info.get_json_data(), status=201)
 
 @csrf_exempt
 def login_view(request):

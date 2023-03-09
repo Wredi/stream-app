@@ -58,6 +58,9 @@ class ChannelInfo(models.Model):
     channel_name = models.CharField(max_length=40)
     profile_description = models.CharField(max_length=1024)
 
+    def get_json_data(self):
+        return {'channelName': self.channel_name, 'profileDescription': self.profile_description}
+
 class StreamInfo(models.Model):
     user = models.OneToOneField(
         CustomUser,
