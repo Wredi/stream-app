@@ -70,3 +70,6 @@ class StreamInfo(models.Model):
     title = models.CharField(max_length=255)
     activity_type = models.CharField(max_length=255)
     stream_description = models.CharField(max_length=1024)
+
+    def get_json_data(self):
+        return {'title': self.title, 'activityType': self.activity_type, 'streamDescription': self.stream_description}

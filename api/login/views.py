@@ -10,6 +10,18 @@ def logout_view(request):
     logout(request)
     return HttpResponse(status=200)
 
+@csrf_exempt
+def curr_user_stream_data(request):
+    if not request.user.is_authenticated:
+        return JsonResponse({'error': 'User is not logged'}, status=401)
+
+    try:
+        stream_info = StreamInfo.objects.get(user=request.user)
+    except StreamInfo.DoesNotExist:
+        return JsonResponse({'error': 'Something wrong'}, status=502)
+
+    return JsonResponse(stream_info.get_json_data(), status=201)
+
 
 @csrf_exempt
 def curr_user_channel_data(request):
