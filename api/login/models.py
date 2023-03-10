@@ -26,7 +26,7 @@ class CustomUserManager(BaseUserManager):
 
 
 class CustomUser(AbstractBaseUser):
-    username = models.CharField(max_length=40, unique=True)
+    username = models.CharField(max_length=50, unique=True)
     created_date = models.DateTimeField(default=timezone.now, blank=True)
 
     is_active = models.BooleanField(default=True)
