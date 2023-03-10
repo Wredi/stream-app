@@ -11,6 +11,12 @@ def logout_view(request):
     return HttpResponse(status=200)
 
 @csrf_exempt
+def all_active_streams(request):
+    streams = StreamInfo.objects.filter(is_active=True)
+    data = [{**i.get_json_data(), **{"userId": i.user.id}} for i in streams]
+    return JsonResponse(data, status=201, safe=False)
+
+@csrf_exempt
 def curr_user_stream_data(request):
     if not request.user.is_authenticated:
         return JsonResponse({'error': 'User is not logged'}, status=401)
