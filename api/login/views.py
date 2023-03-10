@@ -12,9 +12,49 @@ def logout_view(request):
 
 @csrf_exempt
 def all_active_streams(request):
-    streams = StreamInfo.objects.filter(is_active=True)
-    data = [{**i.get_json_data(), **{"userId": i.user.id}} for i in streams]
-    return JsonResponse(data, status=201, safe=False)
+    if request.method == 'GET':
+        streams = StreamInfo.objects.filter(is_active=True)
+        data = [] 
+        for i in streams:
+            streamInfo = {
+                "streamTitle": i.title,
+                "activityType": i.activity_type,
+                "userName": i.user.username, 
+                "channelName": i.user.channelinfo.channel_name, 
+            }
+            data.append(streamInfo)
+
+        return JsonResponse(data, status=201, safe=False)
+    else:
+        return JsonResponse({'error': 'Invalid request method.'}, status=405)
+
+@csrf_exempt
+def curr_user_stream_update(request):
+    if not request.user.is_authenticated:
+        return JsonResponse({'error': 'User is not logged'}, status=401)
+
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        title = data.get('title')
+        activity_type = data.get('activityType')
+        stream_description = data.get('streamDescription')
+
+        try:
+            stream_info = StreamInfo.objects.get(user=request.user)
+        except StreamInfo.DoesNotExist:
+            return JsonResponse({'error': 'Something wrong'}, status=502)
+
+        if title:
+            stream_info.title = title
+        if activity_type:
+            stream_info.activity_type = activity_type
+        if stream_description:
+            stream_info.stream_description = stream_description
+        stream_info.save()
+
+        return JsonResponse({'success': 'Stream info updated successfully.'}, status=201)
+    else:
+        return JsonResponse({'error': 'Invalid request method.'}, status=405)
 
 @csrf_exempt
 def curr_user_stream_data(request):
@@ -44,8 +84,6 @@ def curr_user_channel_data(request):
 @csrf_exempt
 def login_view(request):
     if request.method == 'POST':
-        print(request)
-        print(request.body)
         data = json.loads(request.body)
         username = data.get('username')
         password = data.get('password')
@@ -66,8 +104,6 @@ def login_view(request):
 @csrf_exempt
 def register(request):
     if request.method == 'POST':
-        print(request)
-        print(request.body)
         data = json.loads(request.body)
         username = data.get('username')
         password = data.get('password')
