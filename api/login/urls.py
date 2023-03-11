@@ -13,4 +13,5 @@ urlpatterns = [
     path('active-streams/', views.all_active_streams, name='all_streams'),
     path('update-stream/', views.curr_user_stream_update, name='update_stream'),
     path('update-channel/', views.curr_user_channel_update, name='update_channel'),
+    path('stream-data/<str:username>/', views.stream_data_by_username, name='stream_data_by_username'),
 ]
