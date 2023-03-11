@@ -1,12 +1,13 @@
-from django.shortcuts import render
-
 from django.http import HttpResponse
+from django.contrib.auth import authenticate
 
-def index(request):
+def authorize(request):
     if request.method == "POST":
         data = request.POST
-        key = data.get("key")
-        print(key, "\t", data.get("name"))
-        if key == "witaj":
-            return HttpResponse("[cool][witaj]", status=200)
+        password = data.get("key")
+        name = data.get("name")
+        user = authenticate(request, username=name, password=password)
+        if user is not None:
+            return HttpResponse(status=200)
+            
     return HttpResponse(status=403)
