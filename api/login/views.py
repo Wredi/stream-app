@@ -57,6 +57,23 @@ def curr_user_stream_update(request):
         return JsonResponse({'error': 'Invalid request method.'}, status=405)
 
 @csrf_exempt
+def stream_data_by_username(request, username):
+    if request.method == 'GET':
+        try:
+            user = CustomUser.objects.get(username=username)
+        except CustomUser.DoesNotExist:
+            return JsonResponse({'error': 'User does not exist'}, status=404)
+
+        try:
+            stream_info = StreamInfo.objects.get(user=user)
+        except StreamInfo.DoesNotExist:
+            return JsonResponse({'error': 'Something wrong'}, status=502)
+
+        return JsonResponse(stream_info.get_json_data(), status=201)
+    else:
+        return JsonResponse({'error': 'Invalid request method.'}, status=405)
+
+@csrf_exempt
 def curr_user_stream_data(request):
     if not request.user.is_authenticated:
         return JsonResponse({'error': 'User is not logged'}, status=401)
@@ -80,6 +97,31 @@ def curr_user_channel_data(request):
         return JsonResponse({'error': 'Something wrong'}, status=502)
 
     return JsonResponse(channel_info.get_json_data(), status=201)
+
+@csrf_exempt
+def curr_user_channel_update(request):
+    if not request.user.is_authenticated:
+        return JsonResponse({'error': 'User is not logged'}, status=401)
+
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        channel_name = data.get('channelName')
+        profile_description = data.get('profileDescription')
+
+        try:
+            channel_info = ChannelInfo.objects.get(user=request.user)
+        except ChannelInfo.DoesNotExist:
+            return JsonResponse({'error': 'Something wrong'}, status=502)
+
+        if channel_name:
+            channel_info.channel_name = channel_name
+        if profile_description:
+            channel_info.profile_description = profile_description
+        channel_info.save()
+
+        return JsonResponse({'success': 'Channel info updated successfully.'}, status=201)
+    else:
+        return JsonResponse({'error': 'Invalid request method.'}, status=405)
 
 @csrf_exempt
 def login_view(request):
