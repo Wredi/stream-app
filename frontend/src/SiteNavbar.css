@@ -7,6 +7,26 @@
     height: 100px;
     display: flex;
     align-items: center;
+
+    animation: colorRotate 5s linear 0s infinite;
+}
+
+@keyframes colorRotate {
+    from {
+        box-shadow: 0px 5px 41px -12px #6666ff;
+    }
+    10% {
+        box-shadow: 0px 5px 41px -12px #0099ff;
+    }
+    50% {
+        box-shadow: 0px 5px 41px -12px #00ff00;
+    }
+    75% {
+        box-shadow: 0px 5px 41px -12px #ff3399;
+    }
+    100% {
+        box-shadow: 0px 5px 41px -12px #6666ff;
+    }
 }
 
 .navbar-inner{
@@ -35,9 +55,12 @@
 }
 
 .navbar-inner-right a:hover{
-    background-color: #284c39;
+    /* background-color: #519872; */
+    background-color: #568564;
+    /* background-color: #519872; */
 }
 
 .navbar-inner-right .init-stream{
-    background-color: #519872;
+    background-color: #70A37F;
+    /* background-color: #284c39; */
 }
