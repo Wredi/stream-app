@@ -13,7 +13,7 @@ def logout_view(request):
 @csrf_exempt
 def all_active_streams(request):
     if request.method == 'GET':
-        streams = StreamInfo.objects.filter(is_active=False)
+        streams = StreamInfo.objects.filter(is_active=True)
         data = [] 
         for i in streams:
             streamInfo = {
