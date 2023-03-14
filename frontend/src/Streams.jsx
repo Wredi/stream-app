@@ -1,8 +1,8 @@
-import './Content.css';
+import './Streams.css';
 
 import BoxStreamInfo from './BoxStreamInfo';
 
-function Content() {
+function Streams() {
   return (
     <div className='content'>
       <h1>Aktywne streamy</h1>
@@ -20,4 +20,4 @@ function Content() {
   );
 }
 
-export default Content;
+export default Streams;

@@ -1,14 +1,15 @@
 import SiteNavbar from './SiteNavbar';
-import Content from './Content';
-import ReactHlsPlayer from 'react-hls-player';
-import './App.css'
+// import ReactHlsPlayer from 'react-hls-player';
+import './Root.css'
+import { Outlet } from "react-router-dom";
 
-function App() {
+function Root() {
   return (
-    <div style={{height: "4000px"}}>
+    <div style={{height: "3000px"}}>
       <SiteNavbar/>
-      <Content/>
+      <Outlet/>
     </div>
+
     /*make video hls player*/
     // <div>
     //   <ReactHlsPlayer
@@ -22,4 +23,4 @@ function App() {
   );
 }
 
-export default App;
+export default Root;
