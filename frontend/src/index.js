@@ -8,14 +8,14 @@ import {
 } from "react-router-dom";
 
 import Root from './Root';
-import Streams from './Streams';
+import Streams, {loader as streamLoader} from './Streams';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root/>,
     children: [
-      { index: true, element: <Streams /> },
+      { index: true, element: <Streams />, loader: () => streamLoader()},
     ],
   },
 ]);
