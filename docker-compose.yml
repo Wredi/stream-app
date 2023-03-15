@@ -7,6 +7,8 @@ services:
       MYSQL_USER: 'someuser'
       MYSQL_PASSWORD: 'toor'
       MYSQL_ROOT_PASSWORD: 'toor-root'
+    ports:
+      - '4000:3306'
     volumes:
       - ./data/db:/var/lib/mysql
 
