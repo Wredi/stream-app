@@ -1,13 +1,21 @@
-.content{
+.streams{
     display: flex;
     justify-content: center;
     width: 100%;
 }
 
-.content-inner{
+.streams-inner{
     margin: 50px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 10px;
+}
+
+.content{
+    margin-top: 50px;
+}
+
+.content > h1{
+    text-align: center;
 }

@@ -1,0 +1,33 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #383838;
+    color: white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.streams{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.streams-inner{
+    margin: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.content{
+    margin-top: 50px;
+}
+
+.content > h1{
+    text-align: center;
+}

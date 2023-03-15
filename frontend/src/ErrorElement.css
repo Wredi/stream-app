@@ -1,0 +1,22 @@
+.error-element-inner{
+    font-size: 32px;
+}
+
+.error-element-inner > *{
+    margin: 15px;
+}
+
+.error-element-inner > h1{
+    font-weight: 900;
+}
+
+.error-element{
+    height: 90vh;
+}
+
+.error-element-inner, .error-element {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}

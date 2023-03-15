@@ -36,11 +36,13 @@ services:
     depends_on:
       - api
   
-  # frontend:
-  #   build: ./frontend
-  #   command: npm start
-  #   container_name: frontend
-  #   ports:
-  #     - "3000:3000"
-  #   stdin_open: true
-  #   tty: true
+  frontend:
+    build: ./frontend
+    command: npm start
+    container_name: frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+    stdin_open: true
+    tty: true

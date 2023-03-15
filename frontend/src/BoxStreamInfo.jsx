@@ -18,7 +18,7 @@ function BoxStreamInfo(props) {
                     </IconContext.Provider>
                 </div>
                 <div>
-                    <p>{props.userName}</p>
+                    <p>{props.channelName}</p>
                 </div>
             </div>
         </div>
