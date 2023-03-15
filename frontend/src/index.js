@@ -9,13 +9,14 @@ import {
 
 import Root from './Root';
 import Streams, {loader as streamLoader} from './Streams';
+import ErrorElement from './ErrorElement';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root/>,
     children: [
-      { index: true, element: <Streams />, loader: () => streamLoader()},
+      { index: true, element: <Streams />, loader: () => streamLoader(), errorElement: <ErrorElement/>},
     ],
   },
 ]);
