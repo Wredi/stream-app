@@ -59,6 +59,9 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
 ]
 
+CORS_ALLOW_CREDENTIALS = True
+SESSION_COOKIE_SAMESITE = None
+
 ROOT_URLCONF = 'api.urls'
 
 TEMPLATES = [

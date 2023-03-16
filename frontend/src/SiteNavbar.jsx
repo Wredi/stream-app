@@ -1,3 +1,4 @@
+import { NavLink } from 'react-router-dom';
 import './SiteNavbar.css'
 
 function SiteNavbar() {
@@ -5,11 +6,11 @@ function SiteNavbar() {
     <nav className='navbar'>
       <div className='navbar-inner'>
         <div className='navbar-inner-left'>
-          <span>LOGO</span>
+          <NavLink to="/">LOGO</NavLink>
         </div>
         <div className='navbar-inner-right'>
-          <a href="#" className='init-stream'>Inicjalizuj stream</a>
-          <a href="#">Zaloguj sie</a>
+          <NavLink className={'init-stream'} to="/stream">Inicjalizuj stream</NavLink>
+          <NavLink to="/login">Zaloguj się</NavLink>
         </div>
       </div>
     </nav>
