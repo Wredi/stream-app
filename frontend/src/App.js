@@ -1,5 +1,6 @@
 import SiteNavbar from './SiteNavbar';
 import Content from './Content';
+import StreamSite from './StreamInside';
 import ReactHlsPlayer from 'react-hls-player';
 import './App.css'
 
@@ -11,13 +12,7 @@ function App() {
     </div>=*/
     /*make video hls player*/
     <div>
-      <ReactHlsPlayer
-        src="http://localhost:8080/hls/witaj.m3u8"
-        autoPlay={false}
-        controls={true}
-        width="100%"
-        height="auto"
-      />
+      <StreamSite />
     </div>
   );
 }
