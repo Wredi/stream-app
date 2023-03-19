@@ -29,7 +29,119 @@ export default function Streams() {
       <h1>Aktywne streamy</h1>
       <div className='streams'>
           <div className='streams-inner'>
-              {displayStreams}
+              {/* {displayStreams} */}
+              <BoxStreamInfo
+                key={0} 
+                title="{stream.streamTitle} "
+                channelName="{stream.channelName} "
+                userName="{stream.channelName} "
+                imgLink="https://i.ytimg.com/vi/UPtoIy-oPWQ/maxresdefault.jpg"
+              />
+              <BoxStreamInfo
+                key={1} 
+                title="{stream.streamTitle} "
+                channelName="{stream.channelName} "
+                userName="{stream.channelName} "
+                imgLink="https://i.ytimg.com/vi/UPtoIy-oPWQ/maxresdefault.jpg"
+              />
+              <BoxStreamInfo
+                key={2} 
+                title="{stream.streamTitle} "
+                channelName="{stream.channelName} "
+                userName="{stream.channelName} "
+                imgLink="https://i.ytimg.com/vi/UPtoIy-oPWQ/maxresdefault.jpg"
+              />
+              <BoxStreamInfo
+                key={3} 
+                title="{stream.streamTitle} "
+                channelName="{stream.channelName} "
+                userName="{stream.channelName} "
+                imgLink="https://i.ytimg.com/vi/UPtoIy-oPWQ/maxresdefault.jpg"
+              />
+              <BoxStreamInfo
+                key={4} 
+                title="{stream.streamTitle} "
+                channelName="{stream.channelName} "
+                userName="{stream.channelName} "
+                imgLink="https://i.ytimg.com/vi/UPtoIy-oPWQ/maxresdefault.jpg"
+              />
+              <BoxStreamInfo
+                key={5} 
+                title="{stream.streamTitle} "
+                channelName="{stream.channelName} "
+                userName="{stream.channelName} "
+                imgLink="https://i.ytimg.com/vi/UPtoIy-oPWQ/maxresdefault.jpg"
+              />
+              <BoxStreamInfo
+                key={6} 
+                title="{stream.streamTitle} "
+                channelName="{stream.channelName} "
+                userName="{stream.channelName} "
+                imgLink="https://i.ytimg.com/vi/UPtoIy-oPWQ/maxresdefault.jpg"
+              />
+              <BoxStreamInfo
+                key={7} 
+                title="{stream.streamTitle} "
+                channelName="{stream.channelName} "
+                userName="{stream.channelName} "
+                imgLink="https://i.ytimg.com/vi/UPtoIy-oPWQ/maxresdefault.jpg"
+              />
+              <BoxStreamInfo
+                key={8} 
+                title="{stream.streamTitle} "
+                channelName="{stream.channelName} "
+                userName="{stream.channelName} "
+                imgLink="https://i.ytimg.com/vi/UPtoIy-oPWQ/maxresdefault.jpg"
+              />
+              <BoxStreamInfo
+                key={9} 
+                title="{stream.streamTitle} "
+                channelName="{stream.channelName} "
+                userName="{stream.channelName} "
+                imgLink="https://i.ytimg.com/vi/UPtoIy-oPWQ/maxresdefault.jpg"
+              />
+              <BoxStreamInfo
+                key={10} 
+                title="{stream.streamTitle} "
+                channelName="{stream.channelName} "
+                userName="{stream.channelName} "
+                imgLink="https://i.ytimg.com/vi/UPtoIy-oPWQ/maxresdefault.jpg"
+              />
+              <BoxStreamInfo
+                key={11} 
+                title="{stream.streamTitle} "
+                channelName="{stream.channelName} "
+                userName="{stream.channelName} "
+                imgLink="https://i.ytimg.com/vi/UPtoIy-oPWQ/maxresdefault.jpg"
+              />
+              <BoxStreamInfo
+                key={12} 
+                title="{stream.streamTitle} "
+                channelName="{stream.channelName} "
+                userName="{stream.channelName} "
+                imgLink="https://i.ytimg.com/vi/UPtoIy-oPWQ/maxresdefault.jpg"
+              />
+              <BoxStreamInfo
+                key={13} 
+                title="{stream.streamTitle} "
+                channelName="{stream.channelName} "
+                userName="{stream.channelName} "
+                imgLink="https://i.ytimg.com/vi/UPtoIy-oPWQ/maxresdefault.jpg"
+              />
+              <BoxStreamInfo
+                key={14} 
+                title="{stream.streamTitle} "
+                channelName="{stream.channelName} "
+                userName="{stream.channelName} "
+                imgLink="https://i.ytimg.com/vi/UPtoIy-oPWQ/maxresdefault.jpg"
+              />
+              <BoxStreamInfo
+                key={15} 
+                title="{stream.streamTitle} "
+                channelName="{stream.channelName} "
+                userName="{stream.channelName} "
+                imgLink="https://i.ytimg.com/vi/UPtoIy-oPWQ/maxresdefault.jpg"
+              />
           </div>
       </div>
     </div>
