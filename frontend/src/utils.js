@@ -61,10 +61,14 @@ export const isUserLogged = async () =>{
             throw new Error(error);
         });
 
-    if(response.status === 200) {
-        return true;
-    }
+    const data = await response.json();
+    return data.isLogged;
+}
 
-    return false;
+export const logout = async () =>{
+    await fetch('http://localhost:8000/login/logout/', {credentials: "include"})
+        .catch(error => { 
+            throw new Error(error);
+        });
 }
 

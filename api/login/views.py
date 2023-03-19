@@ -8,9 +8,9 @@ from django.contrib.auth import logout
 @csrf_exempt
 def is_user_logged(request):
     if request.user.is_authenticated:
-        return HttpResponse(status=200)
+        return JsonResponse({'isLogged': True}, status=200)
 
-    return HttpResponse(status=401)
+    return JsonResponse({'isLogged': False}, status=200)
 
 @csrf_exempt
 def logout_view(request):
