@@ -5,8 +5,6 @@ import './index.css';
 import {
   createBrowserRouter,
   RouterProvider,
-  redirect,
-
 } from "react-router-dom";
 
 import Root, {loader as rootLoader} from './Root';
@@ -15,14 +13,6 @@ import ErrorElement from './ErrorElement';
 import LoginPage, {action as loginAction} from './LoginPage';
 import RegisterPage, {action as registerAction} from './RegisterPage';
 import InitStream, {loader as streamInitLoader} from './InitStream';
-
-import {logout} from './utils.js';
-
-//TODO: this is bad
-async function logoutLoader(){
-  await logout();
-  throw redirect("/");
-}
 
 const router = createBrowserRouter([
   {
@@ -46,10 +36,6 @@ const router = createBrowserRouter([
         path: "stream-init",
         element: <InitStream />,
         loader: streamInitLoader,
-      },
-      {
-        path: "logout",
-        loader: logoutLoader
       },
     ],
   },
