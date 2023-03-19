@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import './SiteNavbar.css'
 
-function SiteNavbar() {
+function SiteNavbar(props) {
   return (
     <nav className='navbar'>
       <div className='navbar-inner'>
@@ -10,7 +10,7 @@ function SiteNavbar() {
         </div>
         <div className='navbar-inner-right'>
           <NavLink className={'init-stream'} to="/stream-init">Inicjalizuj stream</NavLink>
-          <NavLink to="/login">Zaloguj się</NavLink>
+          {props.isLogged ? <NavLink to="/logout">Wyloguj się</NavLink> : <NavLink to="/login">Zaloguj się</NavLink>}
         </div>
       </div>
     </nav>

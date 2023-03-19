@@ -55,3 +55,16 @@ export const register = async (user) => {
     return null;
 }
 
+export const isUserLogged = async () =>{
+    const response = await fetch('http://localhost:8000/login/check-logged/', {credentials: "include"})
+        .catch(error => { 
+            throw new Error(error);
+        });
+
+    if(response.status === 200) {
+        return true;
+    }
+
+    return false;
+}
+

@@ -7,7 +7,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 
-import Root from './Root';
+import Root, {loader as rootLoader} from './Root';
 import Streams, {loader as streamLoader} from './Streams';
 import ErrorElement from './ErrorElement';
 import LoginPage, {action as loginAction} from './LoginPage';
@@ -19,6 +19,7 @@ const router = createBrowserRouter([
     path: "/",
     element: <Root/>,
     errorElement: <ErrorElement/>,
+    loader: rootLoader,
     children: [
       { index: true, element: <Streams />, loader: streamLoader, errorElement: <ErrorElement/>},
       {

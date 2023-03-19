@@ -1,12 +1,19 @@
 import SiteNavbar from './SiteNavbar';
 // import ReactHlsPlayer from 'react-hls-player';
 import './Root.css'
-import { Outlet } from "react-router-dom";
+import { Outlet, useLoaderData } from "react-router-dom";
+import {isUserLogged} from './utils.js';
+
+export async function loader() {
+  const isLogged = await isUserLogged();
+  return { isLogged };
+}
 
 function Root() {
+  const { isLogged } = useLoaderData();
   return (
     <div style={{height: "3000px"}}>
-      <SiteNavbar/>
+      <SiteNavbar isLogged={isLogged}/>
       <Outlet/>
     </div>
 

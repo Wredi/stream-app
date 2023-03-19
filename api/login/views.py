@@ -6,6 +6,13 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
 
 @csrf_exempt
+def is_user_logged(request):
+    if request.user.is_authenticated:
+        return HttpResponse(status=200)
+
+    return HttpResponse(status=401)
+
+@csrf_exempt
 def logout_view(request):
     logout(request)
     return HttpResponse(status=200)
