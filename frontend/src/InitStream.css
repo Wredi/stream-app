@@ -1,11 +1,52 @@
-textarea:invalid {
-    border: 2px dashed red;
-}
-  
-textarea:valid {
-    border: 2px solid lime;
+.content-stream-data {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin: 2rem 0;
 }
 
-textarea {
-    resize: none;
+.content-stream-data form{
+    width: 500px;
+}
+
+.content-stream-data label {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.content-stream-data textarea {
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    border: 2px solid #ccc;
+    font-size: 1rem;
+    resize: vertical;
+    background-color: #383838;
+    color: white;
+}
+
+.content-stream-data textarea:focus {
+    outline: none;
+    border-color: #568564;
+}
+
+.content-stream-data button {
+    background-color: #70A37F;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    width: 100%;
+}
+  
+.content-stream-data button:hover {
+    background-color: #568564;
+}
+
+.success{
+    color: green;
 }

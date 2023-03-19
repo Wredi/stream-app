@@ -12,7 +12,7 @@ import Streams, {loader as streamLoader} from './Streams';
 import ErrorElement from './ErrorElement';
 import LoginPage, {action as loginAction} from './LoginPage';
 import RegisterPage, {action as registerAction} from './RegisterPage';
-import InitStream, {loader as streamInitLoader} from './InitStream';
+import InitStream, {loader as streamInitLoader, action as streamInitAction} from './InitStream';
 
 const router = createBrowserRouter([
   {
@@ -36,6 +36,8 @@ const router = createBrowserRouter([
         path: "stream-init",
         element: <InitStream />,
         loader: streamInitLoader,
+        action: streamInitAction,
+        errorElement: <ErrorElement/>
       },
     ],
   },

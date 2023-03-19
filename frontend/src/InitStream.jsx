@@ -2,32 +2,43 @@ import './InitStream.css';
 import {
   useLoaderData,
   useFetcher,
+  redirect,
 } from "react-router-dom";
+import { loggedUserStreamData, updateStreamData } from './utils';
 
 export async function loader() {
-    const response = await fetch('http://localhost:8000/login/stream-data/', {credentials: 'include'})
-        .catch(error => { 
-            throw new Error(error);
-        });
+  const data = await loggedUserStreamData();
+  if(data === null){
+    return redirect('/login');
+  }
+  return { data };
+}
 
-    const data = await response.json();
-    if(!response.ok) {
-        throw new Response(data.error, { status: response.status });
-    }
-
-    return { data };
+export async function action({ request }) {
+  const formData = await request.formData();
+  const userData = Object.fromEntries(formData);
+  
+  const result = await updateStreamData(userData);
+  return result;
 }
 
 export default function InitStream() {
   const { data } = useLoaderData();
   const fetcher = useFetcher();
-
+  const msg = fetcher.data;
   return (
-    <div className='content'>
+    <div className='content-stream-data'>
         <fetcher.Form method="post">
-            <textarea name="title" id="title" cols="30" rows="10" required maxLength={255} minLength={10}>{data.title}</textarea>
-            <textarea name="activityType" id="activityType" cols="30" rows="10" required maxLength={255} minLength={10}>{data.activityType}</textarea>
-            <textarea name="streamDescription" id="streamDescription" cols="30" rows="10" required maxLength={255} minLength={10}>{data.streamDescription}</textarea>
+            <label htmlFor=""title>Tytuł:</label>
+            <textarea name="title" id="title" rows="8" required maxLength={255} minLength={10} defaultValue={data.title}></textarea>
+            <label htmlFor=""title>Rodzaj aktywności:</label>
+            <textarea name="activityType" id="activityType" rows="8" required maxLength={50} minLength={10} defaultValue={data.activityType}></textarea>
+            <label htmlFor=""title>Opis:</label>
+            <textarea name="streamDescription" id="streamDescription" rows="8" required maxLength={1024} minLength={10} defaultValue={data.streamDescription}></textarea>
+            <button type="submit">Zapisz</button>
+            {fetcher.state === 'submitting' && <img alt="loading" className='loader' src="./spinner.gif"/>}
+            {msg?.error && <h2 className='error'>{msg.error}</h2>}
+            {msg?.success && <h2 className='success'>{msg.success}</h2>}
         </fetcher.Form>
     </div>
   );
