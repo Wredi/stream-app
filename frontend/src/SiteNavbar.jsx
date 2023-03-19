@@ -9,7 +9,7 @@ function SiteNavbar() {
           <NavLink to="/">LOGO</NavLink>
         </div>
         <div className='navbar-inner-right'>
-          <NavLink className={'init-stream'} to="/stream">Inicjalizuj stream</NavLink>
+          <NavLink className={'init-stream'} to="/stream-init">Inicjalizuj stream</NavLink>
           <NavLink to="/login">Zaloguj się</NavLink>
         </div>
       </div>

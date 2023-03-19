@@ -1,6 +1,6 @@
 import './LoginPage.css';
 import {
-    Form,
+    Link,
     redirect,
     useFetcher,
 } from "react-router-dom";
@@ -32,7 +32,12 @@ export default function LoginPage(){
             <input type="password" name="password" id="password"/>
 
             <button type="submit">Zaloguj się</button>
+            
+            {fetcher.state === 'submitting' && <img alt="loading" className='loader' src="./spinner.gif"/>}
             {error && <h2 className='error'>{error}</h2>}
+            <span className='register-redirect'>
+                Nie masz konta? <Link to="/register">Zarejestruj się</Link>
+            </span>
         </fetcher.Form>
     );
 }

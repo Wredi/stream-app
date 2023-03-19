@@ -11,18 +11,31 @@ import Root from './Root';
 import Streams, {loader as streamLoader} from './Streams';
 import ErrorElement from './ErrorElement';
 import LoginPage, {action as loginAction} from './LoginPage';
+import RegisterPage, {action as registerAction} from './RegisterPage';
+import InitStream, {loader as streamInitLoader} from './InitStream';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root/>,
+    errorElement: <ErrorElement/>,
     children: [
       { index: true, element: <Streams />, loader: streamLoader, errorElement: <ErrorElement/>},
       {
         path: "login",
         element: <LoginPage />,
         action: loginAction,
-      }
+      },
+      {
+        path: "register",
+        element: <RegisterPage />,
+        action: registerAction,
+      },
+      {
+        path: "stream-init",
+        element: <InitStream />,
+        loader: streamInitLoader,
+      },
     ],
   },
 ]);

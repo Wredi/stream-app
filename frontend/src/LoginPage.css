@@ -61,3 +61,16 @@ button[type="submit"]:hover {
   font-size: 28px;
   margin-top: 10px;
 }
+
+.register-redirect{
+  margin-top: 10px;
+  color: #aaa;
+}
+
+.register-redirect > a{
+  color: #bbb;
+}
+
+.register-redirect > a:hover{
+  color: #888;
+}
