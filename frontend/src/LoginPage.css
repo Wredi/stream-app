@@ -1,0 +1,74 @@
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #1e1e1e;
+  padding: 20px;
+  border-radius: 10px;
+  width: 400px;
+  margin: 100px auto 0px auto;
+}
+
+.login-form h1 {
+  color: #fff;
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0 0 20px;
+  text-align: center;
+}
+
+.login-form label {
+  display: block;
+  color: #fff;
+  margin: 20px 0 10px;
+  text-align: left;
+}
+
+.login-form input{
+  padding: 10px;
+  margin: 5px 0 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #2b2b2b;
+  color: #fff;
+  width: 100%;
+}
+
+.login-form input:focus {
+  outline: none;
+  box-shadow: 0px 0px 5px #fff;
+}
+
+.login-form button {
+  padding: 10px;
+  margin: 20px 0 0;
+  border: none;
+  border-radius: 5px;
+  background-color: #70A37F;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.login-form button:hover {
+  background-color: #568564;
+}
+
+.error{
+  color: red;
+  font-size: 28px;
+  margin-top: 10px;
+}
+
+.register-redirect{
+  margin-top: 10px;
+  color: #aaa;
+}
+
+.register-redirect > a{
+  color: #bbb;
+}
+
+.register-redirect > a:hover{
+  color: #888;
+}

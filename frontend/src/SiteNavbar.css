@@ -8,7 +8,7 @@
     display: flex;
     align-items: center;
 
-    animation: colorRotate 5s linear 0s infinite;
+    /* animation: colorRotate 5s linear 0s infinite; */
 }
 
 @keyframes colorRotate {
