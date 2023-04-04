@@ -58,10 +58,10 @@ export default function Streams() {
 
   const displayStreams = activeStreams.map((stream, idx) => 
     <BoxStreamInfo
-      key={idx} 
-      title={stream.streamTitle} 
-      channelName={stream.channelName} 
-      userName={stream.channelName} 
+      key={idx}
+      title={stream.streamTitle}
+      channelName={stream.channelName}
+      userName={stream.channelName}
       imgLink="https://i.ytimg.com/vi/UPtoIy-oPWQ/maxresdefault.jpg"
     />
   );

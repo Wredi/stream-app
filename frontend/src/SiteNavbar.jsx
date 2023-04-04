@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import './SiteNavbar.css'
 import {logout} from './utils.js';
+import Logo from './Logo';
 
 function SiteNavbar(props) {
   async function logoutCos() {
@@ -12,7 +13,7 @@ function SiteNavbar(props) {
     <nav className='navbar'>
       <div className='navbar-inner'>
         <div className='navbar-inner-left'>
-          <NavLink to="/">LOGO</NavLink>
+          <NavLink to="/"><Logo/></NavLink>
         </div>
         <div className='navbar-inner-right'>
           <NavLink className={'init-stream'} to="/stream-init">Inicjalizuj stream</NavLink>
