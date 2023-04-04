@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
-import './SiteNavbar.css'
-import {logout} from './utils.js';
+import '../css/SiteNavbar.css'
+import {logout} from '../utils.js';
 import Logo from './Logo';
 
 function SiteNavbar(props) {

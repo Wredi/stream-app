@@ -1,10 +1,10 @@
-import './LoginPage.css';
+import '../css/Login.css';
 import {
     Link,
     redirect,
     useFetcher,
 } from "react-router-dom";
-import {login} from './utils.js';
+import {login} from '../utils.js';
 
 export async function action({ request }) {
     const formData = await request.formData();

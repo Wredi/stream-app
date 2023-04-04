@@ -1,8 +1,8 @@
-import SiteNavbar from './SiteNavbar';
+import SiteNavbar from '../components/SiteNavbar';
 // import ReactHlsPlayer from 'react-hls-player';
-import './Root.css'
+import '../css/Root.css'
 import { Outlet, useLoaderData } from "react-router-dom";
-import {isUserLogged} from './utils.js';
+import {isUserLogged} from '../utils.js';
 
 export async function loader() {
   const isLogged = await isUserLogged();

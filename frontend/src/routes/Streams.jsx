@@ -1,13 +1,13 @@
-import './Streams.css';
+import '../css/Streams.css';
 
 import {
   useLoaderData,
 } from "react-router-dom";
 
-import BoxStreamInfo from './BoxStreamInfo';
+import BoxStreamInfo from '../components/BoxStreamInfo';
 import { useState } from 'react';
 
-import { getStreams } from './utils';
+import { getStreams } from '../utils';
 
 export async function loader() {
   const activeStreams = await getStreams();

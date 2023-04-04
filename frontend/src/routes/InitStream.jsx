@@ -1,10 +1,10 @@
-import './InitStream.css';
+import '../css/InitStream.css';
 import {
   useLoaderData,
   useFetcher,
   redirect,
 } from "react-router-dom";
-import { loggedUserStreamData, updateStreamData } from './utils';
+import { loggedUserStreamData, updateStreamData } from '../utils';
 
 export async function loader() {
   const data = await loggedUserStreamData();

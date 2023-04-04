@@ -1,4 +1,4 @@
-import './BoxStreamInfo.css';
+import '../css/BoxStreamInfo.css';
 import { FaUserAlt } from "react-icons/fa";
 import { IconContext } from "react-icons";
 
