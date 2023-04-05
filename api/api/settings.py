@@ -28,13 +28,13 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-AUTH_USER_MODEL = 'login.CustomUser'
+AUTH_USER_MODEL = 'webapi.CustomUser'
 
 # Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
-    'login.apps.LoginConfig',
+    'webapi.apps.LoginConfig',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',

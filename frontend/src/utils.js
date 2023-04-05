@@ -1,5 +1,5 @@
 export const getStreams = async () => {
-    const response = await fetch('http://localhost:8000/login/active-streams/')
+    const response = await fetch('http://localhost:8000/webapi/active-streams/')
         .catch(error => { 
             throw new Error(error);
         });
@@ -14,7 +14,7 @@ export const getStreams = async () => {
 };
 
 export const login = async (user) => {
-    const response = await fetch('http://localhost:8000/login/login/', {
+    const response = await fetch('http://localhost:8000/webapi/login/', {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -35,7 +35,7 @@ export const login = async (user) => {
 }
 
 export const register = async (user) => {
-    const response = await fetch('http://localhost:8000/login/register/', {
+    const response = await fetch('http://localhost:8000/webapi/register/', {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -56,7 +56,7 @@ export const register = async (user) => {
 }
 
 export const updateStreamData = async (streamData) => {
-    const response = await fetch('http://localhost:8000/login/update-stream/', {
+    const response = await fetch('http://localhost:8000/webapi/update-stream/', {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -73,7 +73,7 @@ export const updateStreamData = async (streamData) => {
 }
 
 export const isUserLogged = async () =>{
-    const response = await fetch('http://localhost:8000/login/check-logged/', {credentials: "include"})
+    const response = await fetch('http://localhost:8000/webapi/check-logged/', {credentials: "include"})
         .catch(error => { 
             throw new Error(error);
         });
@@ -83,14 +83,14 @@ export const isUserLogged = async () =>{
 }
 
 export const logout = async () =>{
-    await fetch('http://localhost:8000/login/logout/', {credentials: "include"})
+    await fetch('http://localhost:8000/webapi/logout/', {credentials: "include"})
         .catch(error => { 
             throw new Error(error);
         });
 }
 
 export async function loggedUserStreamData() {
-    const response = await fetch('http://localhost:8000/login/stream-data/', {credentials: 'include'})
+    const response = await fetch('http://localhost:8000/webapi/stream-data/', {credentials: 'include'})
         .catch(error => { 
             throw new Error(error);
         });

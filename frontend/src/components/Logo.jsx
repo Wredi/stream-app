@@ -4,7 +4,7 @@ export default function Logo() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      xmlnsSvg="http://www.w3.org/2000/svg"
+      xmlnssvg="http://www.w3.org/2000/svg"
       width="340"
       height="42.82"
       version="1.1"
