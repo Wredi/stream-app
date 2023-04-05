@@ -1,5 +1,5 @@
 export const getStreams = async () => {
-    const response = await fetch('http://localhost:8000/webapi/active-streams/')
+    const response = await fetch('http://localhost:8000/webapi/streams/active/')
         .catch(error => { 
             throw new Error(error);
         });
@@ -14,7 +14,7 @@ export const getStreams = async () => {
 };
 
 export const login = async (user) => {
-    const response = await fetch('http://localhost:8000/webapi/login/', {
+    const response = await fetch('http://localhost:8000/webapi/post-session/', {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -35,7 +35,7 @@ export const login = async (user) => {
 }
 
 export const register = async (user) => {
-    const response = await fetch('http://localhost:8000/webapi/register/', {
+    const response = await fetch('http://localhost:8000/webapi/users/new/', {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -56,8 +56,8 @@ export const register = async (user) => {
 }
 
 export const updateStreamData = async (streamData) => {
-    const response = await fetch('http://localhost:8000/webapi/update-stream/', {
-        method: "POST",
+    const response = await fetch('http://localhost:8000/webapi/users/me/post-stream/', {
+        method: "PUT",
         headers: {
             "Content-Type": "application/json",
         },
@@ -73,7 +73,7 @@ export const updateStreamData = async (streamData) => {
 }
 
 export const isUserLogged = async () =>{
-    const response = await fetch('http://localhost:8000/webapi/check-logged/', {credentials: "include"})
+    const response = await fetch('http://localhost:8000/webapi/session/', {credentials: "include"})
         .catch(error => { 
             throw new Error(error);
         });
@@ -83,14 +83,14 @@ export const isUserLogged = async () =>{
 }
 
 export const logout = async () =>{
-    await fetch('http://localhost:8000/webapi/logout/', {credentials: "include"})
+    await fetch('http://localhost:8000/webapi/delete-session/', {credentials: "include", method: "DELETE"})
         .catch(error => { 
             throw new Error(error);
         });
 }
 
 export async function loggedUserStreamData() {
-    const response = await fetch('http://localhost:8000/webapi/stream-data/', {credentials: 'include'})
+    const response = await fetch('http://localhost:8000/webapi/users/me/stream/', {credentials: 'include'})
         .catch(error => { 
             throw new Error(error);
         });
