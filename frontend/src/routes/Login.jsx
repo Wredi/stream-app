@@ -3,6 +3,7 @@ import {
     Link,
     redirect,
     useFetcher,
+    useLocation
 } from "react-router-dom";
 import {login} from '../utils.js';
 
@@ -20,7 +21,9 @@ export async function action({ request }) {
 
 export default function LoginPage(){
     const fetcher = useFetcher();
-    const error = fetcher.data;
+    const {state} = useLocation();
+
+    const error = fetcher.data || state?.error;
     return (
         <fetcher.Form method="post" className='login-form'>
             <h1>Logowanie</h1>

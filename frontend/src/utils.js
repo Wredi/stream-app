@@ -108,3 +108,39 @@ export async function loggedUserStreamData() {
     return data;
 }
 
+
+export async function loggedUserChannelData() {
+    const response = await fetch('http://localhost:8000/webapi/users/me/channel/', {credentials: 'include'})
+        .catch(error => { 
+            throw new Error(error);
+        });
+
+    const data = await response.json();
+
+    if(response.status === 401){
+        return null;
+    }
+
+    if(!response.ok) {
+        throw new Response(data.error, { status: response.status });
+    }
+
+    return data;
+}
+
+export const updateChannelData = async (streamData) => {
+    const response = await fetch('http://localhost:8000/webapi/users/me/channel-update/', {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(streamData),
+        credentials: "include",
+    })
+    .catch(error => { 
+        throw new Error(error);
+    });
+
+    const data = await response.json();
+    return data;
+}

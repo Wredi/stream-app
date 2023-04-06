@@ -10,7 +10,8 @@ import Streams, {loader as streamLoader} from './Streams';
 import ErrorElement from '../components/ErrorElement';
 import Login, {action as loginAction} from './Login';
 import Register, {action as registerAction} from './Register';
-import InitStream, {loader as streamInitLoader, action as streamInitAction} from './InitStream';
+import StreamData, {loader as streamInitLoader, action as streamInitAction} from './StreamData';
+import ChannelData, {loader as channelDataLoader, action as channelDataAction} from './ChannelData';
 
 export const router = createBrowserRouter([
   {
@@ -32,9 +33,16 @@ export const router = createBrowserRouter([
       },
       {
         path: "stream-init",
-        element: <InitStream />,
+        element: <StreamData />,
         loader: streamInitLoader,
         action: streamInitAction,
+        errorElement: <ErrorElement/>
+      },
+      {
+        path: "user-data",
+        element: <ChannelData />,
+        loader: channelDataLoader,
+        action: channelDataAction,
         errorElement: <ErrorElement/>
       },
     ],

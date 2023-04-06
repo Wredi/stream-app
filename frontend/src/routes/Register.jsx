@@ -14,9 +14,9 @@ export async function action({ request }) {
         return "Oba hasła muszą być takie same!";
     }
 
-    const result = await register(userData);
-    if(result !== null){
-        return result;
+    const errors = await register(userData);
+    if(errors !== null){
+        return errors;
     }
 
     return redirect('/login');

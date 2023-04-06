@@ -2,7 +2,7 @@ import '../css/InitStream.css';
 import {
   useLoaderData,
   useFetcher,
-  redirect,
+  redirect
 } from "react-router-dom";
 import { loggedUserStreamData, updateStreamData } from '../utils';
 
@@ -22,10 +22,11 @@ export async function action({ request }) {
   return result;
 }
 
-export default function InitStream() {
+export default function StreamData() {
   const { data } = useLoaderData();
   const fetcher = useFetcher();
   const msg = fetcher.data;
+
   return (
     <div className='content-stream-data'>
         <fetcher.Form method="post">
