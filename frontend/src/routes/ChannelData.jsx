@@ -35,9 +35,9 @@ export default function InitStream() {
   return (
     <div className='content-stream-data'>
         <fetcher.Form method="post">
-            <label htmlFor=""title>Nazwa kanału:</label>
+            <label htmlFor="channelName">Nazwa kanału:</label>
             <textarea name="channelName" id="channelName" rows="3" required maxLength={40} minLength={10} defaultValue={data.channelName}></textarea>
-            <label htmlFor=""title>Opis kanału:</label>
+            <label htmlFor="profileDescription">Opis kanału:</label>
             <textarea name="profileDescription" id="profileDescription" rows="8" required maxLength={1024} minLength={10} defaultValue={data.profileDescription}></textarea>
             <button type="submit">Zapisz</button>
             <button onClick={logoutUser}>Wyloguj się</button>

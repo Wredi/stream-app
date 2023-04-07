@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 
 import Root, {loader as rootLoader} from './Root';
-import Streams, {loader as streamLoader} from './Streams';
+import Index, {loader as streamLoader} from './Index';
 import ErrorElement from '../components/ErrorElement';
 import Login, {action as loginAction} from './Login';
 import Register, {action as registerAction} from './Register';
@@ -20,7 +20,7 @@ export const router = createBrowserRouter([
     errorElement: <ErrorElement/>,
     loader: rootLoader,
     children: [
-      { index: true, element: <Streams />, loader: streamLoader, errorElement: <ErrorElement/>},
+      { index: true, element: <Index />, loader: streamLoader, errorElement: <ErrorElement/>},
       {
         path: "login",
         element: <Login />,
