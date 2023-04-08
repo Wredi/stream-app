@@ -1,5 +1,9 @@
 import Hls from 'hls.js';
+import { useState } from 'react';
 import { useEffect, useRef } from 'react';
+import { FaPause, FaPlay } from 'react-icons/fa';
+import { IconContext } from "react-icons";
+import '../css/StreamWindow.css';
 
 const config = {
     debug: true,
@@ -26,6 +30,9 @@ export default function StreamWindow({src}) {
     const videoElement = useRef(null);
     const hlsRef = useRef(null);
 
+    const [volume, setVolume] = useState(1);
+    const [isPlaying, setIsPlaying] = useState(false);
+
     useEffect(() => {
         const hls = hlsRef.current = new Hls(config);
 
@@ -36,17 +43,36 @@ export default function StreamWindow({src}) {
         return () => hls.destroy();
     }, []);
 
-    const handleVideoClick = () => {
+    const onPlayClick = () => {
         const hls = hlsRef.current;
-        hls.loadSource('http://localhost:8080/hls/witaj.m3u8');
-        hls.attachMedia(videoElement.current);
-        videoElement.current.play();
+        // hls.loadSource('http://localhost:8080/hls/witaj.m3u8');
+        // hls.attachMedia(videoElement.current);
+
+        if(isPlaying){
+            videoElement.current.pause();
+        }else{
+            videoElement.current.play();
+        }
+
+        setIsPlaying(!isPlaying);
+    }
+
+    const onVolumeChange = (e) => {
+        setVolume(e.target.value);
     }
 
     return (
-        <>
-            <video ref={videoElement} controls height={"720px"} width={"1280px"}></video>
-            <button onClick={handleVideoClick}>LOL</button>
-        </>
+        <div className='video-player'>
+            <div class="shadow"></div>
+            <video ref={videoElement}></video>
+            <div className='player-controls'>
+                <button onClick={onPlayClick} className='play-button'>
+                    <IconContext.Provider value={{ className: "shared-class", size: 18, color: "#ffffff" }}>
+                        {isPlaying ? <FaPause/> : <FaPlay/> }
+                    </IconContext.Provider>
+                </button>
+                <input type='range' min={0} max={1} value={volume} step={0.01} onChange={onVolumeChange} className='volume'/>
+            </div>
+        </div>
     );
 }
