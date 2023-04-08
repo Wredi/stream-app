@@ -19,6 +19,11 @@
     transform: translateY(100%) translateY(-5%);
     transition: .3s;
     flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.video-player .player-controls .left{
+    display: flex;
 }
 
 .video-player:hover .player-controls{
@@ -38,14 +43,14 @@
     transition: 0.2s;
 }
 
-.video-player .play-button, .mute-button{
+.video-player .play-button, .mute-button, .fullscreen{
     padding: 10px;
     width: 40px;
     border: none;
     background: none;
 }
 
-.video-player .play-button:hover, .mute-button:hover{
+.video-player .play-button:hover, .mute-button:hover, .fullscreen:hover{
     background-color: #404040;
     cursor: pointer;
 }

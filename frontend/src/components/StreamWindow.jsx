@@ -1,7 +1,7 @@
 import Hls from 'hls.js';
 import { useState } from 'react';
 import { useEffect, useRef } from 'react';
-import { FaPause, FaPlay, FaVolumeDown, FaVolumeMute, FaVolumeUp } from 'react-icons/fa';
+import { FaExpand, FaPause, FaPlay, FaVolumeDown, FaVolumeMute, FaVolumeUp } from 'react-icons/fa';
 import { IconContext } from "react-icons";
 import '../css/StreamWindow.css';
 
@@ -41,6 +41,7 @@ export default function StreamWindow({src}) {
             hls.loadSource('http://localhost:8080/hls/witaj.m3u8');
             hls.attachMedia(videoElement.current);
         }
+
         return () => hls.destroy();
     }, []);
 
@@ -59,12 +60,11 @@ export default function StreamWindow({src}) {
     }
 
     const onMuteClick = () => {
-        console.log("jajoc");
         if(isMuted){
-            videoElement.current.volume = volume;
+            videoElement.current.volume = volume < 0.00000001 ? 0.2 : volume;
+            setVolume(0.2);
         }else{
             videoElement.current.volume = 0.0;
-
         }
         setIsMuted(!isMuted);
     }
@@ -73,7 +73,6 @@ export default function StreamWindow({src}) {
         const v = e.target.value;
         videoElement.current.volume = v;
         if(v < 0.00000001){
-            console.log("beka jak rzeka!");
             setIsMuted(true);
         }else{
             setIsMuted(false);
@@ -81,25 +80,38 @@ export default function StreamWindow({src}) {
         setVolume(v);
     }
 
+    const onFullScreenClick = () => {
+        videoElement.current.requestFullscreen();
+    }
+
     return (
         <div className='video-player'>
             <div className='shadow'></div>
             <video ref={videoElement}></video>
             <div className='player-controls'>
-                <IconContext.Provider value={{ className: "shared-class", size: 14, color: "#ffffff" }}>
-                    <button onClick={onPlayClick} className='play-button'>
-                        {isPlaying ? <FaPause/> : <FaPlay/> }
-                    </button>
-                </IconContext.Provider>
-
-                <IconContext.Provider value={{ className: "shared-class", size: 18, color: "#ffffff" }}>
-                    <div className='volume-box'>
-                        <button onClick={onMuteClick} className='mute-button'>
-                            {isMuted ? <FaVolumeMute/> : volume > 0.5 ? <FaVolumeUp/> : <FaVolumeDown/>}
+                <div className='left'>
+                    <IconContext.Provider value={{ className: "shared-class", size: 14, color: "#ffffff" }}>
+                        <button onClick={onPlayClick} className='play-button'>
+                            {isPlaying ? <FaPause/> : <FaPlay/> }
                         </button>
-                        <input type='range' min={0} max={1} value={volume} step={0.01} onChange={onVolumeChange} className='volume'/>
-                    </div>
-                </IconContext.Provider>
+                    </IconContext.Provider>
+
+                    <IconContext.Provider value={{ className: "shared-class", size: 18, color: "#ffffff" }}>
+                        <div className='volume-box'>
+                            <button onClick={onMuteClick} className='mute-button'>
+                                {isMuted ? <FaVolumeMute/> : volume > 0.5 ? <FaVolumeUp/> : <FaVolumeDown/>}
+                            </button>
+                            <input type='range' min={0} max={1} value={isMuted ? 0.0 : volume} step={0.01} onChange={onVolumeChange} className='volume'/>
+                        </div>
+                    </IconContext.Provider>
+                </div>
+                <div className='right'>
+                    <button onClick={onFullScreenClick} className='fullscreen'>
+                        <IconContext.Provider value={{ className: "shared-class", size: 18, color: "#ffffff" }}>
+                            <FaExpand/>
+                        </IconContext.Provider>
+                    </button>
+                </div>
             </div>
         </div>
     );
