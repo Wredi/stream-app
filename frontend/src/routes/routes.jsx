@@ -12,6 +12,7 @@ import Login, {action as loginAction} from './Login';
 import Register, {action as registerAction} from './Register';
 import StreamData, {loader as streamInitLoader, action as streamInitAction} from './StreamData';
 import ChannelData, {loader as channelDataLoader, action as channelDataAction} from './ChannelData';
+import StreamPage, {loader as streamPageLoader} from './StreamPage';
 
 export const router = createBrowserRouter([
   {
@@ -21,6 +22,11 @@ export const router = createBrowserRouter([
     loader: rootLoader,
     children: [
       { index: true, element: <Index />, loader: streamLoader, errorElement: <ErrorElement/>},
+      {
+        path: "stream/:username",
+        element: <StreamPage />,
+        loader: streamPageLoader,
+      },
       {
         path: "login",
         element: <Login />,
