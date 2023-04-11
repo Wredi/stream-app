@@ -61,8 +61,9 @@ export default function StreamWindow({src}) {
 
     const onMuteClick = () => {
         if(isMuted){
-            videoElement.current.volume = volume < 0.00000001 ? 0.2 : volume;
-            setVolume(0.2);
+            const result = volume < 0.00000001 ? 0.2 : volume;
+            videoElement.current.volume = result;
+            setVolume(result);
         }else{
             videoElement.current.volume = 0.0;
         }
