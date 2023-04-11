@@ -18,5 +18,5 @@ urlpatterns = [
     path('users/me/stream-update/', views.curr_user_stream_update, name='update_stream'),
 
     path('streams/active/', views.all_active_streams, name='all_streams'),
-    path('users/<str:username>/stream', views.stream_data_by_username, name='stream_data_by_username'),
+    path('users/<str:username>/stream/', views.stream_data_by_username, name='stream_data_by_username'),
 ]

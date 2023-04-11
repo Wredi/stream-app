@@ -8,7 +8,6 @@ import BoxStreamInfo from '../components/BoxStreamInfo';
 import { useState } from 'react';
 
 import { getStreams } from '../utils';
-import StreamWindow from '../components/StreamWindow';
 
 export async function loader() {
   const activeStreams = await getStreams();
@@ -68,21 +67,18 @@ export default function Index() {
   );
 
   let test2 = test.filter((stream) => stream.props.channelName.toLowerCase().includes(query.toLowerCase()));
-  // return (
-  //   <div className='content'>
-  //     <h1>Aktywne streamy</h1>
-  //     <div className='query-box'>
-  //       <label htmlFor="query">Szukaj:</label>
-  //       <input id="query" type="text" onChange={e => setQuery(e.target.value)} />
-  //     </div>
-  //     <div className='streams'>
-  //         <div className='streams-inner'>
-  //             {test2}
-  //         </div>
-  //     </div>
-  //   </div>
-  // );
   return (
-    <StreamWindow/>
+    <div className='content'>
+      <h1>Aktywne streamy</h1>
+      <div className='query-box'>
+        <label htmlFor="query">Szukaj:</label>
+        <input id="query" type="text" onChange={e => setQuery(e.target.value)} />
+      </div>
+      <div className='streams'>
+          <div className='streams-inner'>
+              {test2}
+          </div>
+      </div>
+    </div>
   );
 }
