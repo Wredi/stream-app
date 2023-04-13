@@ -145,8 +145,8 @@ export const updateChannelData = async (streamData) => {
     return data;
 }
 
-export const getStreamDataByUsername = async (username) => {
-    const response = await fetch(`http://localhost:8000/webapi/users/${username}/stream/`)
+export const getUserDataByUsername = async (username) => {
+    const response = await fetch(`http://localhost:8000/webapi/users/${username}/full-info/`)
     .catch(error => { 
         throw new Error(error);
     });

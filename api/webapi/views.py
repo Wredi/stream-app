@@ -5,6 +5,28 @@ from .models import CustomUser, ChannelInfo, StreamInfo
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
 from django.views.decorators.http import require_http_methods
+from django.core.exceptions import ObjectDoesNotExist
+
+@csrf_exempt
+@require_http_methods(["GET"])
+def get_full_user_info_by_username(request, username):
+    try:
+        user = CustomUser.objects.get(username=username)
+    except CustomUser.DoesNotExist:
+        return JsonResponse({'error': 'User does not exist'}, status=404)
+
+    try:
+        stream_info = StreamInfo.objects.get(user=user)
+        channel_info = ChannelInfo.objects.get(user=user)
+    except ObjectDoesNotExist:
+        return JsonResponse({'error': 'Something wrong'}, status=502)
+
+
+    output = {
+        "stream": stream_info.get_json_data(),
+        "channel": channel_info.get_json_data()
+    }
+    return JsonResponse(output)
 
 @csrf_exempt
 @require_http_methods(["GET"])
@@ -30,20 +52,20 @@ def all_active_streams(request):
 
     return JsonResponse(data, status=201, safe=False)
 
-@csrf_exempt
-@require_http_methods(["GET"])
-def stream_data_by_username(request, username):
-    try:
-        user = CustomUser.objects.get(username=username)
-    except CustomUser.DoesNotExist:
-        return JsonResponse({'error': 'User does not exist'}, status=404)
+# @csrf_exempt
+# @require_http_methods(["GET"])
+# def stream_data_by_username(request, username):
+#     try:
+#         user = CustomUser.objects.get(username=username)
+#     except CustomUser.DoesNotExist:
+#         return JsonResponse({'error': 'User does not exist'}, status=404)
 
-    try:
-        stream_info = StreamInfo.objects.get(user=user)
-    except StreamInfo.DoesNotExist:
-        return JsonResponse({'error': 'Something wrong'}, status=502)
+#     try:
+#         stream_info = StreamInfo.objects.get(user=user)
+#     except StreamInfo.DoesNotExist:
+#         return JsonResponse({'error': 'Something wrong'}, status=502)
 
-    return JsonResponse(stream_info.get_json_data(), status=201)
+#     return JsonResponse(stream_info.get_json_data(), status=201)
 
 @csrf_exempt
 @require_http_methods(["GET"])

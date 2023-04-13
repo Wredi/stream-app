@@ -11,9 +11,8 @@
 }
 
 .stream-info-box {
-    width: 30%;
     display: flex;
-    flex-direction: column;
+    gap: 10px;
 }
 
 .stream-title {
@@ -29,38 +28,17 @@
     color: #b3b3b3;
 }
 
-/* Live chat styles */
-/* .live-chat {
-    background-color: #1a1a1a;
-    padding: 16px;
-    border-radius: 8px;
-    height: 100%;
+.stream-page .profile-pic{
+    width: 100px;
+    height: 100px;
 }
 
-.chat-message {
-    font-size: 16px;
-    margin-bottom: 8px;
-    color: #fff;
-}
-  
-.chat-input {
-    background-color: #000;
-    color: #fff;
-    border-radius: 8px;
-    padding: 8px;
-    margin-top: 16px;
+.stream-page .profile-pic img{
     width: 100%;
-    box-sizing: border-box;
+    height: 100%;
+    border-radius: 50%;
+    border: 1px black solid;
 }
-
-.chat-input::placeholder {
-    color: #b3b3b3;
-}
-
-.chat-input:focus {
-    outline: none;
-    box-shadow: 0 0 0 2px #4b367c;
-} */
 
 .live-chat {
     background-color: #1a1a1a;
