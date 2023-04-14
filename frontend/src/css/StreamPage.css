@@ -52,7 +52,14 @@
 
 .chat-box {
     flex: 1;
+    overflow-wrap: break-word;
+    overflow-y: hidden;
+}
+
+.chat-box:hover{
     overflow-y: scroll;
+    overflow-y: overlay;
+    transition: 2s ease-in-out;
 }
 
 .chat-message {
@@ -61,10 +68,22 @@
     color: #fff;
 }
 
-.current-user {
-    color: #00ff00;
-}
-
 .message-username {
     font-weight: bold;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }
