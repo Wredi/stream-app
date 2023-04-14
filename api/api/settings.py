@@ -33,6 +33,7 @@ AUTH_USER_MODEL = 'webapi.CustomUser'
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
     'django.contrib.admin',
     'webapi.apps.LoginConfig',
     'django.contrib.auth',
@@ -42,6 +43,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
 ]
+
+ASGI_APPLICATION = "api.asgi.application"
+
+# CHANNEL_LAYERS = {
+#     'default':{
+#         'BACKEND':'channels.layers.InMemoryChannelLayer'
+#     }
+# }
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
