@@ -43,6 +43,7 @@
 .live-chat {
     background-color: #1a1a1a;
     height: 100%;
+    width: 300px;
     display: flex;
     flex-direction: column;
     padding: 16px;
