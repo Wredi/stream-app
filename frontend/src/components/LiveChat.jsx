@@ -51,7 +51,7 @@ export default function LiveChat({ streamerUsername }) {
       <div className='chat-box'>
         {messages.map((message, index) => (
           <p key={index} className={'chat-message'}>
-            <span className='message-username'>{message.username}: </span>{message.message}
+            <span className='message-username'>{message.username == '' ? "anonim" : message.username}: </span>{message.message}
           </p>
         ))}
       </div>

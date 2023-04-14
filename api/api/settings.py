@@ -46,11 +46,11 @@ INSTALLED_APPS = [
 
 ASGI_APPLICATION = "api.asgi.application"
 
-# CHANNEL_LAYERS = {
-#     'default':{
-#         'BACKEND':'channels.layers.InMemoryChannelLayer'
-#     }
-# }
+CHANNEL_LAYERS = {
+    'default':{
+        'BACKEND':'channels.layers.InMemoryChannelLayer'
+    }
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
