@@ -1,0 +1,34 @@
+.user-panel__nav{
+    height: 500px;
+    width: 200px;
+}
+.user-panel__nav-menu{
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;    
+    height: 100%;
+}
+.user-panel__nav-menu-item{
+    background-color: #70A37F;
+}
+.user-panel__nav-menu-item:hover{
+    background-color: #568564;
+}
+.user-panel__nav-menu-item-link{
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+}
+
+.user-panel__nav-menu-item--pos-bottom{
+    margin-top: auto;
+    background-color: #ff1010;
+}
+
+.user-panel__nav-menu-item--pos-bottom:hover{
+    background-color: #701010;
+}

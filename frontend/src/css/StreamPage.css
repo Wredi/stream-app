@@ -72,18 +72,18 @@
     font-weight: bold;
 }
 
-::-webkit-scrollbar {
+.chat-box::-webkit-scrollbar {
     width: 10px;
 }
 
-::-webkit-scrollbar-track {
+.chat-box::-webkit-scrollbar-track {
     background: #1a1a1a;
 }
 
-::-webkit-scrollbar-thumb {
+.chat-box::-webkit-scrollbar-thumb {
     background: #888;
 }
 
-::-webkit-scrollbar-thumb:hover {
+.chat-box::-webkit-scrollbar-thumb:hover {
     background: #555;
 }

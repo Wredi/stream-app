@@ -1,5 +1,4 @@
 import SiteNavbar from '../components/SiteNavbar';
-// import ReactHlsPlayer from 'react-hls-player';
 import '../css/Root.css'
 import { Outlet, useLoaderData } from "react-router-dom";
 import {isUserLogged} from '../utils.js';

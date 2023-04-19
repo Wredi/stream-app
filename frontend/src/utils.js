@@ -56,7 +56,7 @@ export const register = async (user) => {
 }
 
 export const updateStreamData = async (streamData) => {
-    const response = await fetch('http://localhost:8000/webapi/users/me/post-stream/', {
+    const response = await fetch('http://localhost:8000/webapi/users/me/stream-update/', {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
