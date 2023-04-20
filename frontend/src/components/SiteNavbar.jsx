@@ -14,9 +14,8 @@ function SiteNavbar(props) {
         <div className='navbar-inner-right'>
           {props.isLogged ? 
           <>
-            <NavLink className={'init-stream'} to="/stream-init">Inicjalizuj stream</NavLink>
-            <NavLink to="/user-data">
-              <IconContext.Provider value={{ className: "shared-class", size: 20 }}>
+            <NavLink to="/user">
+              <IconContext.Provider value={{ className: "shared-class", size: 32 }}>
                     <FaUserAlt/>
               </IconContext.Provider>
             </NavLink>

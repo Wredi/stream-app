@@ -11,7 +11,7 @@ export async function loader() {
 function Root() {
   const { isLogged } = useLoaderData();
   return (
-    <div style={{height: "3000px"}}>
+    <div>
       <SiteNavbar isLogged={isLogged}/>
       <Outlet/>
     </div>

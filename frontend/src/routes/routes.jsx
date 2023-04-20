@@ -3,6 +3,7 @@ import '../css/index.css';
 
 import {
   createBrowserRouter,
+  Navigate
 } from "react-router-dom";
 
 import Root, {loader as rootLoader} from './Root';
@@ -13,6 +14,7 @@ import Register, {action as registerAction} from './Register';
 import StreamData, {loader as streamInitLoader, action as streamInitAction} from './StreamData';
 import ChannelData, {loader as channelDataLoader, action as channelDataAction} from './ChannelData';
 import StreamPage, {loader as streamPageLoader} from './StreamPage';
+import UserPanel from './UserPanel';
 
 export const router = createBrowserRouter([
   {
@@ -38,19 +40,27 @@ export const router = createBrowserRouter([
         action: registerAction,
       },
       {
-        path: "stream-init",
-        element: <StreamData />,
-        loader: streamInitLoader,
-        action: streamInitAction,
-        errorElement: <ErrorElement/>
-      },
-      {
-        path: "user-data",
-        element: <ChannelData />,
-        loader: channelDataLoader,
-        action: channelDataAction,
-        errorElement: <ErrorElement/>
-      },
+        path: "user",
+        element: <UserPanel/>,
+        errorElement: <ErrorElement/>,
+        children: [
+          { index: true, element: <Navigate to="channel" />, errorElement: <ErrorElement/>},
+          {
+            path: "channel",
+            element: <ChannelData/>,
+            loader: channelDataLoader,
+            action: channelDataAction,
+            errorElement: <ErrorElement/>
+          },
+          {
+            path: "stream",
+            element: <StreamData />,
+            loader: streamInitLoader,
+            action: streamInitAction,
+            errorElement: <ErrorElement/>
+          },
+        ]
+      }
     ],
   },
 ]);
