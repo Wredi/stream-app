@@ -5,6 +5,8 @@ import {
   redirect
 } from "react-router-dom";
 import { loggedUserStreamData, updateStreamData } from '../utils';
+import Spinner from '../components/Spinner';
+import ErrorMsg from '../components/ErrorMsg';
 
 export async function loader() {
   const data = await loggedUserStreamData();
@@ -36,10 +38,10 @@ export default function StreamData() {
             <textarea name="activityType" id="activityType" rows="8" required maxLength={50} minLength={10} defaultValue={data.activityType}></textarea>
             <label htmlFor="streamDescription">Opis:</label>
             <textarea name="streamDescription" id="streamDescription" rows="8" required maxLength={1024} minLength={10} defaultValue={data.streamDescription}></textarea>
-            <button type="submit">Zapisz</button>
-            {fetcher.state === 'submitting' && <img alt="loading" className='loader' src="./spinner.gif"/>}
-            {msg?.error && <h2 className='error'>{msg.error}</h2>}
-            {msg?.success && <h2 className='success'>{msg.success}</h2>}
+            <button type="submit">{fetcher.state === 'submitting' ? <Spinner size={30}/> : 'Zapisz'}</button>
+
+            {msg?.error && <ErrorMsg msg={msg.error}/>}
+            {msg?.success && <ErrorMsg msg={msg.success} color={'#00ff00'}/>}
         </fetcher.Form>
     </div>
   );

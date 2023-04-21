@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 import { loggedUserChannelData, logout, updateChannelData } from '../utils';
 import Spinner from '../components/Spinner';
+import ErrorMsg from '../components/ErrorMsg';
 
 export async function loader() {
   const data = await loggedUserChannelData();
@@ -37,8 +38,8 @@ export default function InitStream() {
             <textarea name="profileDescription" id="profileDescription" rows="8" required maxLength={1024} minLength={10} defaultValue={data.profileDescription}></textarea>
             <button type="submit">{fetcher.state === 'submitting' ? <Spinner size={30}/> : 'Zapisz'}</button>
             
-            {msg?.error && <h2 className='error'>{msg.error}</h2>}
-            {msg?.success && <h2 className='success'>{msg.success}</h2>}
+            {msg?.error && <ErrorMsg msg={msg.error}/>}
+            {msg?.success && <ErrorMsg msg={msg.success} color={'#00ff00'}/>}
         </fetcher.Form>
     </div>
   );

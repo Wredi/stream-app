@@ -1,0 +1,21 @@
+.error-msg{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: red;
+    width: 100%;
+    padding: 10px;
+    margin: 5px;
+    animation: scale 1s ease-in-out 0.15s;
+    transform-origin: top center;
+}
+
+@keyframes scale {
+  from {
+    transform: scaleY(0);
+  }
+
+  to {
+    transform: scaleY(1);
+  }
+}

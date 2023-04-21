@@ -1,3 +1,6 @@
+.stream-info-link{
+   text-decoration: none; 
+}
 .stream-info{
     width: 300px;
     height: 300px;

@@ -6,6 +6,8 @@ import {
     useLocation
 } from "react-router-dom";
 import {login} from '../utils.js';
+import ErrorMsg from '../components/ErrorMsg';
+import Spinner from '../components/Spinner';
 
 export async function action({ request }) {
     const formData = await request.formData();
@@ -34,10 +36,9 @@ export default function LoginPage(){
             <label htmlFor='password'>Hasło:</label>
             <input type="password" name="password" id="password"/>
 
-            <button type="submit">Zaloguj się</button>
+            <button type="submit">{fetcher.state === 'submitting' ? <Spinner size={30}/> : 'Zaloguj się'}</button>
             
-            {fetcher.state === 'submitting' && <img alt="loading" className='loader' src="./spinner.gif"/>}
-            {error && <h2 className='error'>{error}</h2>}
+            {error && <ErrorMsg msg={error}/>}
             <span className='register-redirect'>
                 Nie masz konta? <Link to="/register">Zarejestruj się</Link>
             </span>
