@@ -1,11 +1,14 @@
 import { useLoaderData } from "react-router-dom";
 import StreamWindow from '../components/StreamWindow';
 import LiveChat from '../components/LiveChat';
-import { getUserDataByUsername } from '../utils';
+import { queryApi } from '../utils';
 import '../css/StreamPage.css';
 
 export async function loader({ params }) {
-  const data = await getUserDataByUsername(params.username);
+  const data = await queryApi(`/users/${params.username}/full-info/`);
+  if(data?.error) {
+    throw new Response(data.error, { status: data.status });
+  }
   return { data };
 }
 
@@ -32,7 +35,7 @@ export default function StreamPage() {
         </div>
       </div>
       <div className='right'>
-        <LiveChat />
+        <LiveChat streamerUsername={data.username}/>
       </div>
     </div>
   );

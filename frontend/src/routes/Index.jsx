@@ -7,11 +7,13 @@ import {
 import BoxStreamInfo from '../components/BoxStreamInfo';
 import { useState } from 'react';
 
-import { getStreams } from '../utils';
-import UserPanel from './UserPanel';
+import { queryApi } from '../utils';
 
 export async function loader() {
-  const activeStreams = await getStreams();
+  const activeStreams = await queryApi('/streams/active/');
+  if(activeStreams?.error){
+    throw new Response(activeStreams.error, { status: activeStreams.status });
+  }
   return { activeStreams };
 }
 

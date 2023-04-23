@@ -6,12 +6,16 @@ from channels.generic.websocket import WebsocketConsumer
 
 class ChatConsumer(WebsocketConsumer):
     def connect(self):
+        user = self.scope["user"]
+        if user.is_anonymous:
+            return
+
+        self.user = user.username
+
         self.room_name = self.scope["url_route"]["kwargs"]["room_name"]
         self.room_group_name = "chat_%s" % self.room_name
 
-        user = self.scope["user"]
-        self.user = user.username
-        print(self.user)
+        print(f'Hello, {user}')
 
         async_to_sync(self.channel_layer.group_add)(
             self.room_group_name, self.channel_name

@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
+import '../css/LiveChat.css';
 
 export default function LiveChat({ streamerUsername }) {
   const [messages, setMessages] = useState([]);

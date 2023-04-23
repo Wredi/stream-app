@@ -22,13 +22,6 @@ export default function UserPanel() {
         </nav>
         <div className='user-panel__content'>
             <Outlet/>
-            {/* <h1>Witaj!</h1>
-            <p>ustawienia:</p>
-            <span>lol</span>
-            <label>
-                Podaj dane:
-                <input type="text" />
-            </label> */}
         </div>
     </div>
   </div>

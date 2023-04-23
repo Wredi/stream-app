@@ -4,7 +4,7 @@ import {
     redirect,
     useFetcher,
 } from "react-router-dom";
-import {register} from '../utils.js';
+import {sendApi} from '../utils.js';
 import ErrorMsg from '../components/ErrorMsg';
 import Spinner from '../components/Spinner';
 
@@ -13,12 +13,12 @@ export async function action({ request }) {
     const userData = Object.fromEntries(formData);
     
     if(userData.password !== userData.password2){
-        return "Oba hasła muszą być takie same!";
+        return {error: "Oba hasła muszą być takie same!"};
     }
 
-    const errors = await register(userData);
-    if(errors !== null){
-        return errors;
+    const result = await sendApi('/users/new/', 'POST', userData);
+    if(result !== null){
+        return result;
     }
 
     return redirect('/login');
@@ -26,7 +26,7 @@ export async function action({ request }) {
 
 export default function LoginPage(){
     const fetcher = useFetcher();
-    const error = fetcher.data;
+    const result = fetcher.data;
     return (
         <fetcher.Form method="post" className='login-form'>
             <h1>Rejestracja</h1>
@@ -45,7 +45,7 @@ export default function LoginPage(){
 
             <button type="submit">{fetcher.state === 'submitting' ? <Spinner size={30}/> : 'Zarejestruj się'}</button>
             
-            {error && <ErrorMsg msg={error}/>}
+            {result?.error && <ErrorMsg msg={result.error}/>}
             <span className='register-redirect'>
                 Masz już konto? <Link to="/login">Zaloguj się</Link>
             </span>

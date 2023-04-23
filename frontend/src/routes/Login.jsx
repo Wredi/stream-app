@@ -3,9 +3,10 @@ import {
     Link,
     redirect,
     useFetcher,
-    useLocation
+    useLocation,
+    useNavigate
 } from "react-router-dom";
-import {login} from '../utils.js';
+import {sendApi} from '../utils.js';
 import ErrorMsg from '../components/ErrorMsg';
 import Spinner from '../components/Spinner';
 
@@ -13,7 +14,7 @@ export async function action({ request }) {
     const formData = await request.formData();
     const userData = Object.fromEntries(formData);
     
-    const result = await login(userData);
+    const result = await sendApi('/post-session/', 'POST', userData);
     if(result !== null){
         return result;
     }
@@ -23,9 +24,8 @@ export async function action({ request }) {
 
 export default function LoginPage(){
     const fetcher = useFetcher();
-    const {state} = useLocation();
+    const result = fetcher.data;
 
-    const error = fetcher.data || state?.error;
     return (
         <fetcher.Form method="post" className='login-form'>
             <h1>Logowanie</h1>
@@ -38,7 +38,7 @@ export default function LoginPage(){
 
             <button type="submit">{fetcher.state === 'submitting' ? <Spinner size={30}/> : 'Zaloguj się'}</button>
             
-            {error && <ErrorMsg msg={error}/>}
+            {result?.error && <ErrorMsg msg={result.error}/>}
             <span className='register-redirect'>
                 Nie masz konta? <Link to="/register">Zarejestruj się</Link>
             </span>

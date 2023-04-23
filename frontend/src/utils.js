@@ -1,76 +1,41 @@
-export const getStreams = async () => {
-    const response = await fetch('http://localhost:8000/webapi/streams/active/')
+export const API_URL = 'http://localhost:8000/webapi';
+export const STREAM_URL = 'http://127.0.0.1:8080/hls';
+
+export async function queryApi(path){
+    const response = await fetch(`${API_URL}${path}`, {credentials: 'include'})
         .catch(error => { 
             throw new Error(error);
         });
 
-
     const data = await response.json();
-    if(!response.ok) {
-        throw new Response(data.error, { status: response.status });
+    if(response.ok) {
+        return data;
     }
 
-    return data;
-};
+    return {error: data.error, status: response.status};
+}
 
-export const login = async (user) => {
-    const response = await fetch('http://localhost:8000/webapi/post-session/', {
-        method: "POST",
+export async function sendApi(path, method, body){
+    const response = await fetch(`${API_URL}${path}`, {
+        method: method,
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify(user),
+        body: JSON.stringify(body),
         credentials: "include",
     })
     .catch(error => { 
         throw new Error(error);
     });
 
-    const data = await response.json();
-    if(!response.ok) {
-        return data.error;
+    if(response.ok) {
+        return null;
     }
 
-    return null;
-}
-
-export const register = async (user) => {
-    const response = await fetch('http://localhost:8000/webapi/users/new/', {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(user),
-        credentials: "include",
-    })
-    .catch(error => { 
-        throw new Error(error);
-    });
-
     const data = await response.json();
-    if(!response.ok) {
-        return data.error;
-    }
-
-    return null;
+    return {error: data.error, status: response.status};
 }
 
-export const updateStreamData = async (streamData) => {
-    const response = await fetch('http://localhost:8000/webapi/users/me/stream-update/', {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(streamData),
-        credentials: "include",
-    })
-    .catch(error => { 
-        throw new Error(error);
-    });
-
-    const data = await response.json();
-    return data;
-}
 
 export const isUserLogged = async () =>{
     const response = await fetch('http://localhost:8000/webapi/session/', {credentials: "include"})
@@ -87,74 +52,4 @@ export const logout = async () =>{
         .catch(error => { 
             throw new Error(error);
         });
-}
-
-export async function loggedUserStreamData() {
-    const response = await fetch('http://localhost:8000/webapi/users/me/stream/', {credentials: 'include'})
-        .catch(error => { 
-            throw new Error(error);
-        });
-
-    const data = await response.json();
-
-    if(response.status === 401){
-        return null;
-    }
-
-    if(!response.ok) {
-        throw new Response(data.error, { status: response.status });
-    }
-
-    return data;
-}
-
-
-export async function loggedUserChannelData() {
-    const response = await fetch('http://localhost:8000/webapi/users/me/channel/', {credentials: 'include'})
-        .catch(error => { 
-            throw new Error(error);
-        });
-
-    const data = await response.json();
-
-    if(response.status === 401){
-        return null;
-    }
-
-    if(!response.ok) {
-        throw new Response(data.error, { status: response.status });
-    }
-
-    return data;
-}
-
-export const updateChannelData = async (streamData) => {
-    const response = await fetch('http://localhost:8000/webapi/users/me/channel-update/', {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(streamData),
-        credentials: "include",
-    })
-    .catch(error => { 
-        throw new Error(error);
-    });
-
-    const data = await response.json();
-    return data;
-}
-
-export const getUserDataByUsername = async (username) => {
-    const response = await fetch(`http://localhost:8000/webapi/users/${username}/full-info/`)
-    .catch(error => { 
-        throw new Error(error);
-    });
-
-    const data = await response.json();
-    if(!response.ok) {
-        throw new Response(data.error, { status: response.status });
-    }
-    
-    return data;
 }

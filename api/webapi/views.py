@@ -24,7 +24,8 @@ def get_full_user_info_by_username(request, username):
 
     output = {
         "stream": stream_info.get_json_data(),
-        "channel": channel_info.get_json_data()
+        "channel": channel_info.get_json_data(),
+        "username": username
     }
     return JsonResponse(output)
 
@@ -50,7 +51,7 @@ def all_active_streams(request):
         }
         data.append(streamInfo)
 
-    return JsonResponse(data, status=201, safe=False)
+    return JsonResponse(data, status=200, safe=False)
 
 # @csrf_exempt
 # @require_http_methods(["GET"])
@@ -65,7 +66,7 @@ def all_active_streams(request):
 #     except StreamInfo.DoesNotExist:
 #         return JsonResponse({'error': 'Something wrong'}, status=502)
 
-#     return JsonResponse(stream_info.get_json_data(), status=201)
+#     return JsonResponse(stream_info.get_json_data(), status=200)
 
 @csrf_exempt
 @require_http_methods(["GET"])
@@ -78,7 +79,7 @@ def curr_user_stream_data(request):
     except StreamInfo.DoesNotExist:
         return JsonResponse({'error': 'Something wrong'}, status=502)
 
-    return JsonResponse(stream_info.get_json_data(), status=201)
+    return JsonResponse(stream_info.get_json_data(), status=200)
 
 
 @csrf_exempt
@@ -92,7 +93,7 @@ def curr_user_channel_data(request):
     except ChannelInfo.DoesNotExist:
         return JsonResponse({'error': 'Something wrong'}, status=502)
 
-    return JsonResponse(channel_info.get_json_data(), status=201)
+    return JsonResponse(channel_info.get_json_data(), status=200)
 
 @csrf_exempt
 @require_http_methods(["PUT"])
@@ -115,7 +116,7 @@ def curr_user_channel_update(request):
         channel_info.profile_description = profile_description
     channel_info.save()
 
-    return JsonResponse({'success': 'Channel info updated successfully.'}, status=201)
+    return JsonResponse({'success': 'Channel info updated successfully.'}, status=200)
 
 @csrf_exempt
 @require_http_methods(["PUT"])
@@ -141,7 +142,7 @@ def curr_user_stream_update(request):
         stream_info.stream_description = stream_description
     stream_info.save()
 
-    return JsonResponse({'success': 'Stream info updated successfully.'}, status=201)
+    return JsonResponse({'success': 'Stream info updated successfully.'}, status=200)
 
 @csrf_exempt
 @require_http_methods(["POST"])
@@ -159,7 +160,7 @@ def session(request):
     else:
         return JsonResponse({'error': 'Invalid credentials.'}, status=400)
 
-    return JsonResponse({'success': 'User logged successfully.'}, status=201)
+    return JsonResponse({'success': 'User logged successfully.'}, status=200)
 
 @csrf_exempt
 @require_http_methods(["DELETE"])
@@ -191,4 +192,4 @@ def new_user(request):
     stream_info = StreamInfo(user=user, title='Default Title', activity_type='Default Type', stream_description='Default Description')
     stream_info.save()
 
-    return JsonResponse({'success': 'User created successfully.'}, status=201)
+    return JsonResponse({'success': 'User created successfully.'}, status=200)

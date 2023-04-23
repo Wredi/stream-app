@@ -38,17 +38,17 @@ export default function StreamWindow({src}) {
         const hls = hlsRef.current = new Hls(config);
 
         if (Hls.isSupported()) {
-            hls.loadSource(src);
-            hls.attachMedia(videoElement.current);
+            // hls.loadSource(src);
+            // hls.attachMedia(videoElement.current);
         }
 
         return () => hls.destroy();
     }, [src]);
 
     const onPlayClick = () => {
-        // const hls = hlsRef.current;
-        // hls.loadSource('http://localhost:8080/hls/witaj.m3u8');
-        // hls.attachMedia(videoElement.current);
+        const hls = hlsRef.current;
+        hls.loadSource('http://localhost:8080/hls/witaj.m3u8');
+        hls.attachMedia(videoElement.current);
 
         if(isPlaying){
             videoElement.current.pause();
