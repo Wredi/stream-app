@@ -30,6 +30,7 @@
     border: 1px solid #999;
     border-bottom: none;
     border-radius: 15px 15px 0% 0%;
+    text-align: center;
 }
 
 .user-panel__nav-menu-item-link.active{
@@ -39,4 +40,5 @@
 
 .user-panel__nav-menu-item-link--color-red{
     background-color: #ff1010;
+    border-color: #ff1010;
 }

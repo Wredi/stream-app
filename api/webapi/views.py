@@ -15,17 +15,27 @@ def get_full_user_info_by_username(request, username):
     except CustomUser.DoesNotExist:
         return JsonResponse({'error': 'User does not exist'}, status=404)
 
+    return get_full_user_info(user)
+
+@csrf_exempt
+@require_http_methods(["GET"])
+def curr_user_full_info(request):
+    if not request.user.is_authenticated:
+        return JsonResponse({'error': 'User is not logged'}, status=401)
+
+    return get_full_user_info(request.user)
+
+def get_full_user_info(user):
     try:
         stream_info = StreamInfo.objects.get(user=user)
         channel_info = ChannelInfo.objects.get(user=user)
     except ObjectDoesNotExist:
         return JsonResponse({'error': 'Something wrong'}, status=502)
 
-
     output = {
         "stream": stream_info.get_json_data(),
         "channel": channel_info.get_json_data(),
-        "username": username
+        "username": user.username
     }
     return JsonResponse(output)
 
@@ -46,27 +56,12 @@ def all_active_streams(request):
         streamInfo = {
             "streamTitle": i.title,
             "activityType": i.activity_type,
-            "userName": i.user.username, 
+            "username": i.user.username, 
             "channelName": i.user.channelinfo.channel_name, 
         }
         data.append(streamInfo)
 
     return JsonResponse(data, status=200, safe=False)
-
-# @csrf_exempt
-# @require_http_methods(["GET"])
-# def stream_data_by_username(request, username):
-#     try:
-#         user = CustomUser.objects.get(username=username)
-#     except CustomUser.DoesNotExist:
-#         return JsonResponse({'error': 'User does not exist'}, status=404)
-
-#     try:
-#         stream_info = StreamInfo.objects.get(user=user)
-#     except StreamInfo.DoesNotExist:
-#         return JsonResponse({'error': 'Something wrong'}, status=502)
-
-#     return JsonResponse(stream_info.get_json_data(), status=200)
 
 @csrf_exempt
 @require_http_methods(["GET"])
@@ -148,13 +143,13 @@ def curr_user_stream_update(request):
 @require_http_methods(["POST"])
 def session(request):
     data = json.loads(request.body)
-    username = data.get('username')
+    email = data.get('email')
     password = data.get('password')
 
-    if not username or not password:
-        return JsonResponse({'error': 'Both username and password are required.'}, status=400)
+    if not email or not password:
+        return JsonResponse({'error': 'Both email and password are required.'}, status=400)
 
-    user = authenticate(request, username=username, password=password)
+    user = authenticate(request, email=email, password=password)
     if user is not None:
         login(request, user)
     else:
@@ -173,20 +168,22 @@ def delete_session(request):
 def new_user(request):
     data = json.loads(request.body)
     username = data.get('username')
+    email = data.get('email')
     password = data.get('password')
-    channel_name = data.get('channelName')
 
-    if not username or not password or not channel_name:
+    if not username or not password or not email:
         return JsonResponse({'error': 'Username, password and channel name are required.'}, status=400)
 
     if CustomUser.objects.filter(username=username).exists():
         return JsonResponse({'error': 'Username already taken.'}, status=400)
 
-    #TODO: transactions?
-    user = CustomUser.objects.create_user(username=username, password=password)
+    if CustomUser.objects.filter(email=email).exists():
+        return JsonResponse({'error': 'Email already taken.'}, status=400)
+
+    user = CustomUser.objects.create_user(email=email, username=username, password=password)
     user.save()
 
-    channel_info = ChannelInfo(user=user, channel_name=channel_name)
+    channel_info = ChannelInfo(user=user)
     channel_info.save()
 
     stream_info = StreamInfo(user=user, title='Default Title', activity_type='Default Type', stream_description='Default Description')

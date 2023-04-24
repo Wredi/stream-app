@@ -3,8 +3,6 @@ import {
     Link,
     redirect,
     useFetcher,
-    useLocation,
-    useNavigate
 } from "react-router-dom";
 import {sendApi} from '../utils.js';
 import ErrorMsg from '../components/ErrorMsg';
@@ -30,8 +28,8 @@ export default function LoginPage(){
         <fetcher.Form method="post" className='login-form'>
             <h1>Logowanie</h1>
 
-            <label htmlFor='username'>Nazwa użytkownika:</label>
-            <input type="text" name="username" id="username"/>
+            <label htmlFor='email'>Adres email:</label>
+            <input type="text" name="email" id="email"/>
 
             <label htmlFor='password'>Hasło:</label>
             <input type="password" name="password" id="password"/>

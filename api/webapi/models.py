@@ -3,22 +3,23 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.utils import timezone
 
 class CustomUserManager(BaseUserManager):
-    def create_user(self, username, password=None):
-        if not username:
+    def create_user(self, email, password, username):
+        if not email:
             raise ValueError('Users must have an username')
 
         user = self.model(
-            username=username,
+            email=email, username=username 
         )
 
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, username, password=None):
+    def create_superuser(self, email, password, username):
         user = self.create_user(
-            username,
-            password=password,
+            email,
+            password,
+            username
         )
         user.is_admin = True
         user.save(using=self._db)
@@ -27,12 +28,14 @@ class CustomUserManager(BaseUserManager):
 
 class CustomUser(AbstractBaseUser):
     username = models.CharField(max_length=50, unique=True)
+    email = models.CharField(max_length=255, unique=True)
+
     created_date = models.DateTimeField(default=timezone.now, blank=True)
 
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
 
-    USERNAME_FIELD = 'username'
+    USERNAME_FIELD = 'email'
 
     objects = CustomUserManager()
 
@@ -55,11 +58,10 @@ class ChannelInfo(models.Model):
         on_delete=models.CASCADE,
         primary_key=True,
     )
-    channel_name = models.CharField(max_length=40)
     profile_description = models.CharField(max_length=1024)
 
     def get_json_data(self):
-        return {'channelName': self.channel_name, 'profileDescription': self.profile_description}
+        return {'profileDescription': self.profile_description}
 
 class StreamInfo(models.Model):
     user = models.OneToOneField(

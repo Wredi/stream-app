@@ -34,8 +34,8 @@ export default function LoginPage(){
             <label htmlFor='username'>Nazwa użytkownika:</label>
             <input type="text" name="username" id="username"/>
 
-            <label htmlFor='username'>Nazwa kanału:</label>
-            <input type="text" name="channelName" id="channelName"/>
+            <label htmlFor='email'>Email:</label>
+            <input type="text" name="email" id="email"/>
 
             <label htmlFor='password'>Hasło:</label>
             <input type="password" name="password" id="password"/>

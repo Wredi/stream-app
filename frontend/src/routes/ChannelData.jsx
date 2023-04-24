@@ -4,7 +4,7 @@ import {
   useFetcher,
   redirect
 } from "react-router-dom";
-import { queryApi, sendApi, updateChannelData } from '../utils';
+import { queryApi, sendApi } from '../utils';
 import Spinner from '../components/Spinner';
 import ErrorMsg from '../components/ErrorMsg';
 
@@ -35,8 +35,6 @@ export default function InitStream() {
   return (
     <div className='content-stream-data'>
         <fetcher.Form method="post">
-            <label htmlFor="channelName">Nazwa kanału:</label>
-            <textarea name="channelName" id="channelName" rows="3" required maxLength={40} minLength={10} defaultValue={data.channelName}></textarea>
             <label htmlFor="profileDescription">Opis kanału:</label>
             <textarea name="profileDescription" id="profileDescription" rows="8" required maxLength={1024} minLength={10} defaultValue={data.profileDescription}></textarea>
             <button type="submit">{fetcher.state === 'submitting' ? <Spinner size={30}/> : 'Zapisz'}</button>
